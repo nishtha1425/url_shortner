@@ -31,4 +31,13 @@ app.get('/:shortUrl', async (req, res) => {
   res.redirect(shortUrl.full)
 })
 
+app.get('/search', async (req, res) => {
+  const keyword = req.query.keyword; // The keyword to search for
+
+  const searchResults = await db.collection('urls').find({ longURL: { $regex: keyword, $options: 'i' } }).toArray();
+
+  res.json({ searchResults });
+});
+
+
 app.listen(process.env.PORT || 5000);
