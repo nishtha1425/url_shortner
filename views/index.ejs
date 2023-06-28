@@ -35,5 +35,22 @@
       </tbody>
     </table>
   </div>
+
+<h2>Search URLs</h2>
+<form action="/search" method="GET">
+    <input type="text" name="keyword" placeholder="Enter a keyword">
+    <button type="submit">Search</button>
+  </form>
+  
+  <% if (searchResults.length > 0) { %>
+    <ul>
+      <% searchResults.forEach(function(url) { %>
+        <li><a href="<%= url.longURL %>"><%= url.longURL %></a></li>
+      <% }) %>
+    </ul>
+  <% } else if (searchResults === 'No results') { %>
+    <p>No results found for the keyword.</p>
+  <% } %>
+
 </body>
 </html>
